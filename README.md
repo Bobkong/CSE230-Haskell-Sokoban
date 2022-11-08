@@ -20,4 +20,4 @@ The player is confined to the board and may move horizontally or vertically onto
 - Level: Develop multiple maps with different difficulty levels.
 - Game Control: Develop the quit game and reload the level features.
 
-Besides these goals, we also want to implement a more interesting feature to elevate user experience. Currently, most Sokoban games can only be played by one player. What if we introduce a new play way, which supports two players playing the game at the same time? They can collaborate with each other to finish the task. We believe this new feature can make the game more playable and fascinating!
+Besides these goals, we also want to implement a more interesting feature to elevate user experience. Currently, most Sokoban games can only be played by one player. What if we introduce a new play way, which supports **two players playing** the game at the same time? They can collaborate with each other to finish the task. We believe this new feature can make the game more playable and fascinating!

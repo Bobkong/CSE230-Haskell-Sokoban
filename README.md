@@ -15,7 +15,7 @@ The player is confined to the board and may move horizontally or vertically onto
 
 - GUI: Develop a fascinating game user interface to show players, blocks, and maps.
 - Movement: Develop the player movement controlled by keyboard events.
-- Collision: Develop the push block and collision check feature.
+- Collision: Develop the push block and collision check features.
 - Logic Check: Develop the task success check features.
 - Level: Develop multiple maps with different difficulty levels.
 - Game Control: Develop the quit game and reload the level features.

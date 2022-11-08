@@ -3,7 +3,7 @@
 ## Project Idae
 
 Sokoban is a puzzle video game genre in which the player pushes crates or boxes around in a warehouse, trying to get them to storage locations. 
-![](./Assests/Sokoban_ani.gif)
+![](./Assets/Sokoban_ani.gif)
 
 The game is played on a board of squares, where each square is a floor or a wall. Some floor squares contain boxes, and some floor squares are marked as storage locations.
 

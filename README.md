@@ -29,6 +29,11 @@ Besides these goals, we also want to implement a more interesting feature to imp
 
 ### Challenges
 
+* We had a few group meetings to discuss the general architecture design for this project. We agreed to adapt the traditional Model-View-Controller model in the end.
+* Our group members are still getting started with the brick library as well as other packages that we will use in our implementation.
+* We discussed task assignments and found out that it would be hard to assign each module to different group members due to potential consistency issues. Therefore, we decided to work together on modules that are closely dependent on each other.
+* We also spent some time setting up and testing the application configuration for our Git repo.
+
 
 ### Project Progress
 

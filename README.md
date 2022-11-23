@@ -25,7 +25,11 @@ Besides these goals, we also want to implement a more interesting feature to imp
 ## Project Updates (11/23/2022)
 
 ### Architecture Design
+To better organize the project, we designed the system with the MVC architecture.
+![](./assets/sfotware_arc.jpg)
 
+We plan to create a single file for each part to separate different functions.
+![](./assets/file_arc.jpg)
 
 ### Challenges
 

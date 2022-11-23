@@ -26,9 +26,10 @@ Besides these goals, we also want to implement a more interesting feature to imp
 
 ### Architecture Design
 To better organize the project, we designed the system with the MVC architecture.
-![](./assets/sfotware_arc.jpg)
+![](./assets/software_arc.jpg)
 
-We plan to create a single file for each part to separate different functions.
+For file architecture, we will create a Main.hs, where we can run the application. We will first read a txt file to load the game map and create the world model, then call the View part functions to draw views, and finally combine keyboard event with controller functions.
+We plan to create three single files for View, Model, and Controller to separate different function parts.
 ![](./assets/file_arc.jpg)
 
 ### Challenges

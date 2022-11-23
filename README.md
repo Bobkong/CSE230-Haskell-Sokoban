@@ -29,7 +29,7 @@ To better organize the project, we designed the system with the MVC architecture
 
 ![](./assets/software_arc.jpg)
 
-For file architecture, we will create a Main.hs, where we can run the application. We will first read a txt file to load the game map and create the world model, then call the View part functions to draw views, and finally combine keyboard event with controller functions.
+For file architecture, we will create a `Main.hs`, where we can run the application. We will first read a txt file to load the game map and create the world model, then call the View part functions to draw views, and finally combine keyboard event with controller functions.
 We plan to create three single files for View, Model, and Controller to separate different function parts.
 
 ![](./assets/file_arc.jpg)

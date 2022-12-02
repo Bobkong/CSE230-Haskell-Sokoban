@@ -1,11 +1,8 @@
 module Lib
-  ( testLib )
-where
+    ( runBrickSimpleSokoban
+    ) where
 
-import System.IO  
-import Control.Monad
+import UI(runMyApplication)
 
-testLib :: IO ()
-testLib = do gameConfig <- openFile "gameConfigs/gameData.txt" ReadMode
-             contents <- hGetContents gameConfig
-             print contents
+runBrickSimpleSokoban :: IO ()
+runBrickSimpleSokoban = runMyApplication

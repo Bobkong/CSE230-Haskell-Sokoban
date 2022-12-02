@@ -1,1 +1,8 @@
-# TODO: initialize game data here
+[
+InitData {level = "Easy", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(0,0)], boxPos = [(-1,0),(1,0)], holePos = [(1,2),(2,2)], wallBrickPos = []},
+InitData {level = "Easy", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(0,0),(0,1)], boxPos = [(-1,0),(1,0)], holePos = [(1,2),(2,2)], wallBrickPos = []},
+InitData {level = "Medium", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(-1,1)], boxPos = [(-1,0),(0,0),(1,0),(-1,-1)], holePos = [(0,1),(0,2),(-1,2),(-2,2)], wallBrickPos = [(-2,0),(1,1),(1,-1)]},
+InitData {level = "Medium", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(-1,1),(0,-1)], boxPos = [(-1,0),(0,0),(1,0),(-1,-1)], holePos = [(0,1),(0,2),(-1,2),(-2,2)], wallBrickPos = [(-2,0),(1,1),(1,-1)]},
+InitData {level = "Hard", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(0,0)], boxPos = [(-1,0),(1,0),(0,-2)], holePos = [(1,2),(2,-1),(0,-2)], wallBrickPos = [(1,1),(1,-1),(-1,-1),(-1,1)]},
+InitData {level = "Hard", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(0,0), (0,1)], boxPos = [(-1,0),(1,0),(0,-2)], holePos = [(1,2),(2,-1),(0,-2)], wallBrickPos = [(1,1),(1,-1),(-1,-1),(-1,1)]}
+]

@@ -90,6 +90,7 @@ judgeGameFinished w = foldr1 (&&) checkList
 processManTryMove :: Direction -> World -> World
 processManTryMove dir w 
   | pushPo `elem` wallBrickPos = w { man = cannotMoveMen } -- push wall
+  | pushPo `elem` manPos = w { man = cannotMoveMen} -- push another man
   | pushPo `elem` boxPos && (isBoxMovableOnDir dir pushPo w)
           = w {man = canMoveMen, boxes = liveBoxes'} -- push box
   | pushPo `elem` boxPos = w {man = cannotMoveMen} -- cannot push box
@@ -108,11 +109,13 @@ processManTryMove dir w
       wallBrickPos = map positionOfWallBrick (wallBricks w)
       boxPos = map positionOfBox liveBoxes
       liveBoxes = boxes w
+      manPos = map positionOfMan (man w)
       mman = head (man w)
 
 processMan2TryMove :: Direction -> World -> World
 processMan2TryMove dir w 
   | pushPo `elem` wallBrickPos = w { man = cannotMoveMen } -- push wall
+  | pushPo `elem` manPos = w { man = cannotMoveMen} -- push another man
   | pushPo `elem` boxPos && (isBoxMovableOnDir dir pushPo w)
           = w {man = canMoveMen, boxes = liveBoxes'} -- push box
   | pushPo `elem` boxPos = w {man = cannotMoveMen} -- cannot push box
@@ -131,6 +134,7 @@ processMan2TryMove dir w
       wallBrickPos = map positionOfWallBrick (wallBricks w)
       boxPos = map positionOfBox liveBoxes
       liveBoxes = boxes w
+      manPos = map positionOfMan (man w)
       mman = last (man w)
 
 isBoxMovableOnDir :: Direction -> Point -> World -> Bool

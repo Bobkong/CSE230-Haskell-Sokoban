@@ -135,7 +135,7 @@ processMan2TryMove dir w
 
 isBoxMovableOnDir :: Direction -> Point -> World -> Bool
 isBoxMovableOnDir dir boxPo w
-  | (judgeP `elem` boxPos) || (judgeP `elem` wallBrickPos) || (judgeP `elem` manPos) = False
+  | (judgeP `elem` boxPos) || (judgeP `elem` wallBrickPos) || (((currentPlayerNum w) == "2") && (judgeP `elem` manPos)) = False
   | otherwise = True
     where
       judgeP = getAdjPtOnDir dir boxPo

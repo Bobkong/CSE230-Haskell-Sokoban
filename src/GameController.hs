@@ -41,7 +41,7 @@ launchWorld ad index st = World ad index hw hh lv pNum man boxes holes wallBrick
     hh = hHeight iData
     lv = level iData
     pNum = playerNumber iData
-    man = map mkMan $ manPos iData
+    man = if pNum == "2" then map mkMan $ manPos iData else map mkMan $ [head (manPos iData), (-100, -100)]
     boxes = map mkBox $ boxPos iData
     holes = map mkHole $ holePos iData
     wallBricks = map mkWallBrick $ wallBrickPos iData

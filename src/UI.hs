@@ -76,19 +76,24 @@ handleEvent w (VtyEvent (V.EvKey (V.KChar 'd') []))
   | otherwise = continue w
 
 -- manipulate man 2
+-- disable keys if playerNum is 1
 handleEvent w (VtyEvent (V.EvKey (V.KUp) []))
+  | currentPlayerNum w == "1" = continue w
   | state w == GameRunning = continue $ processMan2TryMove DirectUp w
   | otherwise = continue w
  
 handleEvent w (VtyEvent (V.EvKey (V.KLeft) []))
+  | currentPlayerNum w == "1" = continue w
   | state w == GameRunning = continue $ processMan2TryMove DirectLeft w
   | otherwise = continue w
 
-handleEvent w (VtyEvent (V.EvKey (V.KDown) [])) 
+handleEvent w (VtyEvent (V.EvKey (V.KDown) []))
+  | currentPlayerNum w == "1" = continue w
   | state w == GameRunning = continue $ processMan2TryMove DirectDown w
   | otherwise = continue w
 
 handleEvent w (VtyEvent (V.EvKey (V.KRight) []))
+  | currentPlayerNum w == "1" = continue w
   | state w == GameRunning = continue $ processMan2TryMove DirectRight w
   | otherwise = continue w
 

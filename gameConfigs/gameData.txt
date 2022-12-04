@@ -1,8 +1,12 @@
 [
-InitData {level = "Easy", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(0,0)], boxPos = [(-1,0),(1,0)], holePos = [(1,2),(2,2)], wallBrickPos = []},
-InitData {level = "Easy", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(0,0),(0,1)], boxPos = [(-1,0),(1,0)], holePos = [(1,2),(2,2)], wallBrickPos = []},
-InitData {level = "Medium", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(-1,1)], boxPos = [(-1,0),(0,0),(1,0),(-1,-1)], holePos = [(0,1),(0,2),(-1,2),(-2,2)], wallBrickPos = [(-2,0),(1,1),(1,-1)]},
-InitData {level = "Medium", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(-1,1),(0,-1)], boxPos = [(-1,0),(0,0),(1,0),(-1,-1)], holePos = [(0,1),(0,2),(-1,2),(-2,2)], wallBrickPos = [(-2,0),(1,1),(1,-1)]},
-InitData {level = "Hard", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(0,0)], boxPos = [(-1,0),(1,0),(0,-2)], holePos = [(1,2),(2,-1),(0,-2)], wallBrickPos = [(1,1),(1,-1),(-1,-1),(-1,1)]},
-InitData {level = "Hard", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(0,0), (0,1)], boxPos = [(-1,0),(1,0),(0,-2)], holePos = [(1,2),(2,-1),(0,-2)], wallBrickPos = [(1,1),(1,-1),(-1,-1),(-1,1)]}
+InitData {level = "1", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(0,0)], boxPos = [(-1,0),(1,0)], holePos = [(1,2),(2,2)], wallBrickPos = []},
+InitData {level = "1", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(0,0),(0,1)], boxPos = [(-1,0),(1,0)], holePos = [(1,2),(2,2)], wallBrickPos = []},
+InitData {level = "2", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(-1,1)], boxPos = [(-1,0),(0,0),(1,0),(-1,-1)], holePos = [(0,1),(0,2),(-1,2),(-2,2)], wallBrickPos = [(-2,0),(1,1),(1,-1)]},
+InitData {level = "2", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(-1,1),(0,-1)], boxPos = [(-1,0),(0,0),(1,0),(-1,-1)], holePos = [(0,1),(0,2),(-1,2),(-2,2)], wallBrickPos = [(-2,0),(1,1),(1,-1)]},
+InitData {level = "3", playerNumber = "1", hWidth = 3, hHeight = 3, manPos = [(0,0)], boxPos = [(-1,0),(1,0),(0,-2)], holePos = [(1,2),(2,-1),(0,-2)], wallBrickPos = [(1,1),(1,-1),(-1,-1),(-1,1)]},
+InitData {level = "3", playerNumber = "2", hWidth = 3, hHeight = 3, manPos = [(0,0), (0,1)], boxPos = [(-1,0),(1,0),(0,-2)], holePos = [(1,2),(2,-1),(0,-2)], wallBrickPos = [(1,1),(1,-1),(-1,-1),(-1,1)]},
+InitData {level = "4", playerNumber = "1", hWidth = 4, hHeight = 4, manPos = [(2,-2)], boxPos = [(2,0),(2,1),(2,-1)], holePos = [(3,0),(3,1),(3,-1)], wallBrickPos = [(1,1),(1,2),(1,3),(1,-1),(1,-2),(1,-3),(-1,1),(-1,-1)]},
+InitData {level = "4", playerNumber = "2", hWidth = 4, hHeight = 4, manPos = [(2,-2), (2,2)], boxPos = [(2,0),(2,1),(2,-1)], holePos = [(3,0),(3,1),(3,-1)], wallBrickPos = [(1,1),(1,2),(1,3),(1,-1),(1,-2),(1,-3),(-1,1),(-1,-1)]},
+InitData {level = "5", playerNumber = "1", hWidth = 5, hHeight = 3, manPos = [(2,1)], boxPos = [(2,0),(-1,0),(-2,-1)], holePos = [(-2,-2),(-3,-2),(-4,-2)], wallBrickPos = [(-4,-1),(-3,1),(-1,1),(-1,2),(-1,-2),(0,-1),(0,-2),(2,-1),(3,1),(3,2),(4,2),(4,1),(4,0),(4,-1),(4,-2)]},
+InitData {level = "5", playerNumber = "2", hWidth = 5, hHeight = 3, manPos = [(2,1), (2,-2)], boxPos = [(2,0),(-1,0),(-2,-1)], holePos = [(-2,-2),(-3,-2),(-4,-2)], wallBrickPos = [(-4,-1),(-3,1),(-1,1),(-1,2),(-1,-2),(0,-1),(0,-2),(2,-1),(3,1),(3,2),(4,2),(4,1),(4,0),(4,-1),(4,-2)]}
 ]

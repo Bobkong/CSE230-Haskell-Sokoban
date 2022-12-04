@@ -33,17 +33,25 @@ drawWorld w = case state w of
             instrAreaW = padTop (Pad 2) $ drawIns w
 
 drawIns :: World -> Widget Name
-drawIns w = instruction
+drawIns w = vBox [instruction, padTop (Pad 2) $ examples]
   where instruction
-          | state w == GameAborted = str "play again <Enter> | back to select <q>"
-          | state w == GameFinished = str "play again <Enter> | back to select <q>"
-          | state w == GameSelecting = str "start <Enter> | previous <j> | next <k> | return <q>"
+          | state w == GameAborted = str "play again <Enter> | back to select <q>" 
+          | state w == GameFinished = str "play again <Enter> | back to select <q>" 
+          | state w == GameSelecting = str "start <Enter> | previous <j> | next <k> | return <q>" 
           | state w == GameRunning && currentPlayerNum w == "1" = str "Move the character by \"WASD\" | abort game <q>"
           | state w == GameRunning && currentPlayerNum w == "2" = str "Move character 1 by \"WSAD\", character 2 by \"▲▼◀▶\" | abort game <q>"
+        examples = drawExample w
+
+drawExample :: World -> Widget Name
+drawExample w = hBox (characters ++ otherExamples)
+  where characters
+          | currentPlayerNum w == "1" = [str "character", padLeft (Pad 1) $ withAttr man1Attr manUpSquare]
+          | currentPlayerNum w == "2" = [str "character 1", padLeft (Pad 1) $ withAttr man1Attr manUpSquare, padLeft(Pad 3) $ str "character 2", padLeft (Pad 1) $ withAttr man2Attr manUpSquare]
+        otherExamples = [padLeft(Pad 3) $ str "box", padLeft (Pad 1) $ (withAttr boxAttr $ boxBigSquare), padLeft(Pad 3) $ str "hole", padLeft (Pad 1) $ withAttr holeAttr holeBigSquare]
 
 drawWelcome :: World -> [Widget Name]
 drawWelcome w = [ C.center $ vBox [C.hCenter welcomePaint, padTop (Pad 3) (welcomeText1 <=> welcomeText2)] ]
-  where 
+  where
     welcomeText1 = C.hCenter $ hLimit (34 * 2) $ str "Welcome to Sokoban!"
     welcomeText2 = C.hCenter $ hLimit (34 * 2) $ str "Press <Enter> for new game | <q> to exit."
     welcomePaint = hBox (map dummyDraw "s o k o b a n" )
@@ -72,8 +80,10 @@ drawLevel l = withBorderStyle BS.unicodeRounded
   $ padLeftRight 2
   $ paintOnLevel l
   where paintOnLevel l = case l of
-          "Medium" -> withAttr mediumLvAttr $ str l
-          "Easy" -> withAttr easyLvAttr $ str l
+          "1" -> withAttr easyLvAttr $ str l
+          "2" -> withAttr easyLvAttr $ str l
+          "3" -> withAttr mediumLvAttr $ str l
+          "4" -> withAttr mediumLvAttr $ str l
           _ -> withAttr hardLvAttr $ str l
 
 drawPlayerNum :: String -> Widget Name
@@ -106,20 +116,17 @@ drawSlogan st tk
   | st == GameFinished = withAttr gameFinishedAttr $ C.hCenter $ str "GAME SUCCESS"
   | st == GameSelecting = withAttr gameSelectingAttr $ C.hCenter $ str
         $ if (tk * tickTimeMS `div` 1000 `mod` 2) == 0 then "SELECTING..." else "        "
-  | st == GameRunning = withAttr gameRunningAttr $ C.hCenter $ str 
+  | st == GameRunning = withAttr gameRunningAttr $ C.hCenter $ str
         $ if (tk * tickTimeMS `div` 500 `mod` 2) == 0 then "FIGHTING!" else "        "
   | otherwise = emptyWidget
     -- shining
-    
+
 
 
 drawGrid :: World -> Widget Name
 drawGrid w = withBorderStyle BS.unicodeRounded
-  $ B.borderWithLabel (str $ "Stage: " ++ showN )
   $ vBox rows
   where
-    showN = if stageN < 10 then "0" ++ show stageN else show stageN
-    stageN = currentInitGameDataIx w
     rows         = [hBox $ cellsInRow r | r <- reverse [(- halfH)..halfH]]
     cellsInRow y = [drawPoint (x, y) | x <- [(-halfW)..halfW]]
     drawPoint    =  drawPointFromWorld w
@@ -128,8 +135,8 @@ drawGrid w = withBorderStyle BS.unicodeRounded
 
 drawPointFromWorld :: World -> Point -> Widget Name
 drawPointFromWorld  w p
-  | p == man1Po = drawMan $ head (man w)
-  | currentPlayerNum w == "2" && p == man2Po = drawMan $ last (man w)
+  | p == man1Po = drawMan1 $ head (man w)
+  | currentPlayerNum w == "2" && p == man2Po = drawMan2 $ last (man w)
   | p `elem` boxPos && p `elem` holePos = drawBox True $ fromJust $ find (\(Box pb) -> pb == p) bs
   | p `elem` boxPos = drawBox False $ fromJust $ find (\(Box pb) -> pb == p) bs
   | p `elem` holePos = drawHole $ fromJust $ find (\(Hole ph) -> ph == p) hs
@@ -145,8 +152,15 @@ drawPointFromWorld  w p
       hs = holes w
       bs = boxes w
 
-drawMan :: Man -> Widget Name
-drawMan man = withAttr manAttr $ case direct man of
+drawMan1 :: Man -> Widget Name
+drawMan1 man = withAttr man1Attr $ case direct man of
+  DirectUp ->  manUpSquare
+  DirectDown -> manDownSquare
+  DirectLeft -> manLeftSquare
+  DirectRight -> manRightSquare
+
+drawMan2 :: Man -> Widget Name
+drawMan2 man = withAttr man2Attr $ case direct man of
   DirectUp ->  manUpSquare
   DirectDown -> manDownSquare
   DirectLeft -> manLeftSquare
@@ -173,10 +187,10 @@ twoSH = hBox [oneS, oneS]
 bigSquare :: Widget Name
 bigSquare = vBox [twoSH, twoSH]
 
-boxBigSquare :: Widget Name 
+boxBigSquare :: Widget Name
 boxBigSquare = holeBigSquare
 
-holeBigSquare :: Widget Name 
+holeBigSquare :: Widget Name
 holeBigSquare = vBox [str " \\/ ", str " /\\ "]
 
 manUpSquare :: Widget Name
@@ -212,7 +226,8 @@ dummyProcess grid = vBox $ map f grid
 
 theMap :: AttrMap
 theMap = attrMap V.defAttr
-  [ (manAttr, V.black `on` manColor)
+  [ (man1Attr, V.black `on` man1Color)
+  , (man2Attr, V.black `on` man2Color)
   , (boxAttr, ( V.white `on` boxColor )`V.withStyle` V.bold)
   , (okBoxAttr, ( clearRedColor `on` okBoxColor )`V.withStyle` V.bold)
   , (holeAttr,holeColor `on` floorColor `V.withStyle` V.bold)
@@ -255,8 +270,11 @@ hardLvColor = V.rgbColor 227 23 13
 mediumLvColor :: V.Color
 mediumLvColor = V.rgbColor 255 97 3
 
-manColor :: V.Color
-manColor = V.rgbColor 0 112 205
+man1Color :: V.Color
+man1Color = V.rgbColor 0 112 205
+
+man2Color :: V.Color
+man2Color = V.rgbColor 255 153 18
 
 
 gameFinishedAttr :: AttrName
@@ -271,14 +289,15 @@ gameSelectingAttr = "gameSelecting"
 gameRunningAttr :: AttrName
 gameRunningAttr = "gameRunning"
 
-manAttr, 
-  boxAttr, okBoxAttr, 
-  holeAttr, 
-  wallBrickAttr, 
-  emptyAttr, 
+man1Attr, man2Attr,
+  boxAttr, okBoxAttr,
+  holeAttr,
+  wallBrickAttr,
+  emptyAttr,
   welcomeCharAttr,
   hardLvAttr,easyLvAttr,mediumLvAttr :: AttrName
-manAttr = "manAttr"
+man1Attr = "man1Attr"
+man2Attr = "man2Attr"
 holeAttr = "holeAttr"
 boxAttr = "boxAttr"
 okBoxAttr = "okBoxAttr"

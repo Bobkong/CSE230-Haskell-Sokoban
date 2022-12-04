@@ -69,10 +69,3 @@ genBounduaries maxX maxY = nub $ leftRightBounds ++ topBottomBounds
       foldr1 (++) (map (\f -> map f [(- maxX)..maxX]) [\x -> (x, (-maxY)),\x -> (x,maxY)])
     leftRightBounds = 
       foldr1 (++) (map (\f -> map f [(- maxY)..maxY]) [\y -> (maxX,y), \y -> ((-maxX),y)])
-
--- inlineSampleInitData :: [InitData]
--- inlineSampleInitData = [sample2, sample1]
---   where 
---     sample1 = InitData "Hard" 3 3 (0,0) [(-1,0),(1,0),(0,-2)] [(1,2),(2,-1),(0,-2)] [(1,1),(1,-1),(-1,-1),(-1,1)]
---     sample2 = InitData "Medium" 3 3 (-1,1) 
---           [(-1,0),(0,0),(1,0),(-1,-1)]  [(0,1),(0,2), (-1,2),(-2,2)] [(-2,0),(1,1),(1,-1)]

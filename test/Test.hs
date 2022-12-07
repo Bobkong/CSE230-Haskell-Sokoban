@@ -23,7 +23,10 @@ main = do
       testCase ("11. test processMan2TryMove (judgeMan2MoveSuccessTest)") (judgeMan2MoveSuccessTest w),
       testCase ("12. test updateOneInBoxesTest") (updateOneInBoxesTest w),
       testCase ("13. test getAdjPtOnDirTest") (getAdjPtOnDirTest w),
-      testCase ("14. test judgeMenCollisionTest (judgeMenCollisionTest)") (judgeMenCollisionTest w)
+      testCase ("14. test judgeMenCollisionTest (judgeMenCollisionTest)") (judgeMenCollisionTest w),
+      testCase ("15. test boxMoveSuccessTest (judgeMenCollisionTest)") (boxMoveSuccessTest w),
+      testCase ("16. test boxMoveCollisionBoxTest (judgeMenCollisionTest)") (boxMoveCollisionBoxTest w),
+      testCase ("17. test boxMoveCollisionWallTest (judgeMenCollisionTest)") (boxMoveCollisionWallTest w)
     ]
 
 worldInitTest :: World -> Assertion
@@ -45,32 +48,32 @@ judgeGameFinishedTrueTest w = assertBool "judgeGameFinished not work correctly" 
 
 judgeManChangeDirectionTest :: World -> Assertion
 judgeManChangeDirectionTest w =
-  assertBool "test Man move direction" $
+  assertBool "test Man move direction failed" $
     DirectDown == direct (head $ man (processManTryMove DirectDown w))
 
 judgeManMoveBlockedTest :: World -> Assertion
 judgeManMoveBlockedTest w =
-  assertBool "test Man move with obstacles" $
+  assertBool "test Man move with obstacles failed" $
     (3, 1) == positionOfMan (head $ man (processManTryMove DirectLeft (w {man = [mkMan (3, 1)], wallBricks = [mkWallBrick (2, 1)]})))
 
 judgeManMoveSuccessTest :: World -> Assertion
 judgeManMoveSuccessTest w =
-  assertBool "test Man move without obstacles" $
+  assertBool "test Man move without obstacles failed" $
     (2, 1) == positionOfMan (head $ man (processManTryMove DirectLeft (w {man = [mkMan (3, 1)]})))
 
 judgeMan2ChangeDirectionTest :: World -> Assertion
 judgeMan2ChangeDirectionTest w =
-  assertBool "test Man 2 move direction" $
+  assertBool "test Man 2 move direction failed" $
     DirectDown == direct (last $ man (processMan2TryMove DirectDown w))
 
 judgeMan2MoveBlockedTest :: World -> Assertion
 judgeMan2MoveBlockedTest w =
-  assertBool "test Man 2 move with obstacles" $
+  assertBool "test Man 2 move with obstacles failed" $
     (3, 1) == positionOfMan (last $ man (processMan2TryMove DirectLeft (w {man = [mkMan (5, 1), mkMan (3, 1)], wallBricks = [mkWallBrick (2, 1)]})))
 
 judgeMan2MoveSuccessTest :: World -> Assertion
 judgeMan2MoveSuccessTest w =
-  assertBool "test Man 2 move without obstacles" $
+  assertBool "test Man 2 move without obstacles failed" $
     (2, 1) == positionOfMan (last $ man (processMan2TryMove DirectLeft (w {man = [mkMan (5, 1), mkMan (3, 1)]})))
 
 updateOneInBoxesTest :: World -> Assertion
@@ -85,6 +88,21 @@ getAdjPtOnDirTest w =
 
 judgeMenCollisionTest :: World -> Assertion
 judgeMenCollisionTest w =
-  assertBool "test Man 2 move with obstacles" $
+  assertBool "test Man 2 move with obstacles failed" $
     (3, 1) == positionOfMan (last $ man (processMan2TryMove DirectLeft (w {man = [mkMan (2, 1), mkMan (3, 1)]})))
       && (2, 1) == positionOfMan (head $ man (processManTryMove DirectRight (w {man = [mkMan (2, 1), mkMan (3, 1)]})))
+
+boxMoveSuccessTest :: World -> Assertion
+boxMoveSuccessTest w =  assertBool "test box move without obstacles failed" 
+    $ (1, 1) `elem` (map positionOfBox (boxes (processManTryMove DirectLeft (w {man = [mkMan (3, 1)], boxes = [mkBox (2, 1)], wallBricks = []}))))
+
+boxMoveCollisionBoxTest :: World -> Assertion
+boxMoveCollisionBoxTest w =  assertBool "test box move collision with other boxes failed" 
+    $ (2, 1) `elem` boxesPositionAfterMove && ((1, 1) `notElem` boxesPositionAfterMove)
+    where boxesPositionAfterMove = (map positionOfBox (boxes (processManTryMove DirectLeft (w {man = [mkMan (4, 1)], boxes = [mkBox (3, 1), mkBox (2, 1)], wallBricks = []}))))
+
+
+boxMoveCollisionWallTest :: World -> Assertion
+boxMoveCollisionWallTest w =  assertBool "test box move collision with wall bricks failed" 
+    $ (2, 1) `elem` boxesPositionAfterMove && ((1, 1) `notElem` boxesPositionAfterMove)
+    where boxesPositionAfterMove = (map positionOfBox (boxes (processManTryMove DirectLeft (w {man = [mkMan (3, 1)], boxes = [mkBox (2, 1)], wallBricks = [mkWallBrick (1, 1)]}))))
